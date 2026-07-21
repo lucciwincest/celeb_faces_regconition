@@ -6,18 +6,19 @@ class CheckpointManager:
         self.checkpoint_dir = Path (checkpoint_dir)
         self.checkpoint_dir.mkdir (exist_ok = True)
 
-    def save (self, name, model, optimizer = None, scheduler = None, epoch = 0, best_acc = 0):
+    def save (self, name, model, optimizer = None, scheduler = None, epoch = 0):
         path = self.checkpoint_dir / name
         torch.save ({
             "epoch": epoch,
             "model": model.state_dict (),
             "optimizer": None if optimizer is None else optimizer.state_dict (),
-            "scheduler": None if scheduler is None else scheduler.state_dict (),
-            "best_acc": best_acc
-        })
+            "scheduler": None if scheduler is None else scheduler.state_dict ()
+        }, path)
     
     def load (self, name, model, optimizer = None, scheduler = None, device = "cpu"):
         path = self.checkpoint_dir / name
+        if not Path.exists (path):
+            return None
         checkpoint = torch.load (path, map_location = device)
         model.load_state_dict (checkpoint ["model"])
         if optimizer is not None and optimizer is not None:
@@ -27,5 +28,7 @@ class CheckpointManager:
         print ("Checkpoint loaded")
         return {
             "epoch": checkpoint ["epoch"],
-            "best_acc": checkpoint ["best_acc"]
         }
+
+    def  exists (self, name):
+        return (self.checkpoint_dir / name).exists ()
