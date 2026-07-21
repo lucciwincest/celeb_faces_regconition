@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-class Neck (nn.Module):
+class GAPNeck (nn.Module):
     def __init__ (self):
         super ().__init__ ()
         self.net = nn.Sequential (
