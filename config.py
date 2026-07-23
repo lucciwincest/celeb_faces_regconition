@@ -1,6 +1,6 @@
 from  pathlib import Path
 
-DATASET_ROOT = Path ("dataset")
+DATASET_ROOT = Path ("../dataset")
 
 IN_CHANNELS = 3
 IMAGE_SIZE = (224, 224)
@@ -12,6 +12,6 @@ LR = 1e-3
 
 DEVICE = "cuda"
 
-CHECKPOINT_DIR = Path ("checkpoints")
+CHECKPOINT_DIR = Path ("../checkpoints")
 BEST_MODEL = CHECKPOINT_DIR / "best.pth"
 LATEST_MODEL = CHECKPOINT_DIR / "latest.pth"
