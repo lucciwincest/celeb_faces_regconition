@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-class LinearHead (nn.Module):
+class Head (nn.Module):
     def __init__  (self, num_classes):
         super ().__init__ ()
         self.net = nn.LazyLinear (num_classes)

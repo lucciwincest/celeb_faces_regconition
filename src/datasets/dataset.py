@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from .transforms import get_transforms
 from config import *
 
-def get_data_loader (dataset_root = DATASET_ROOT, batch_size = BATCH_SIZE, shuffle = False):
+def get_data_loader (dataset_root, batch_size, shuffle = False):
     dataset_root = Path (dataset_root)
     train_transform, val_transform, test_transform = get_transforms ()
 

@@ -1,10 +1,9 @@
 from torchvision import transforms
 from torchvision.models import ResNet50_Weights
-from config import *
 
-def get_transforms ():
+def get_transforms (image_size):
     train_transform = transforms.Compose ([
-        transforms.Resize (IMAGE_SIZE),
+        transforms.Resize (image_size),
         transforms.RandomHorizontalFlip (),
         transforms.RandomRotation (10),
         transforms.ToTensor (),
@@ -15,7 +14,7 @@ def get_transforms ():
     ])
 
     val_transform = transforms.Compose ([
-        transforms.Resize (IMAGE_SIZE),
+        transforms.Resize (image_size),
         transforms.ToTensor (),
         transforms.Normalize (
             mean = ResNet50_Weights.IMAGENET1K_V2.transforms ().mean,
