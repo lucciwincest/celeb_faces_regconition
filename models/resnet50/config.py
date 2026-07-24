@@ -1,31 +1,37 @@
 from dataclasses import dataclass, field
+from pathlib import Path
 
 
-@dataclass (slots = True)
+@dataclass
 class Config:
+    data_root: Path = Path("dataset")
+    experiment_dir: Path = Path("models/resnet50/experiments")
 
-    epochs = 30
+    epochs: int = 30
+    batch_size: int = 32
+    learning_rate: float = 1e-4
 
-    batch_size = 32
+    seed: int = 42
+    patience: int = 5
+    image_size: tuple [int, int] = (224, 224)
 
-    learning_rate = 1e-4
+    prefer_devices: list[str] = field(
+        default_factory=lambda: ["cuda", "mps", "cpu"]
+    )
 
-    weight_decay = 1e-4
+    resume: bool = False
 
-    freeze_backbone = True
+    freeze_backbone: bool = True
+    progressive_unfreezing: bool = True
 
-    progressive_unfreezing = True
-
-    unfreeze_schedule = field (
-        default_factory = lambda: {
+    unfreeze_schedule: dict[int, list[str]] = field(
+        default_factory=lambda: {
             5: ["layer4"],
             10: ["layer3"],
             15: ["layer2"],
-            20: ["all"]
+            20: ["all"],
         }
     )
 
-    experiment_dir = "models/resnet50/experiments"
 
-
-cfg = Config ()
+cfg = Config()

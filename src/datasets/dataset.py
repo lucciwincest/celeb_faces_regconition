@@ -3,11 +3,11 @@ from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 
 from .transforms import get_transforms
-from config import *
 
-def get_data_loader (dataset_root, batch_size, shuffle = False):
+
+def get_data_loader (dataset_root, batch_size, image_size, shuffle = False):
     dataset_root = Path (dataset_root)
-    train_transform, val_transform, test_transform = get_transforms ()
+    train_transform, val_transform, test_transform = get_transforms (image_size)
 
     train_dataset = ImageFolder (dataset_root / "train", train_transform)
     val_dataset = ImageFolder (dataset_root / "val", val_transform)

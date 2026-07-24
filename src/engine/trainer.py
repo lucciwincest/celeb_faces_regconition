@@ -67,7 +67,7 @@ class Trainer:
             self.val_acc = self.validate ()
             print (f"Epoch {epoch}/{end_epoch}")
             print (f"Loss: {train_loss:.4f}")
-            print (f"Validation Accuracy: {val_acc:.4f}")
+            print (f"Validation Accuracy: {self.val_acc:.4f}")
 
             lrs = [group ["lr"] for group in self.optimizer.param_groups]
 
@@ -77,7 +77,7 @@ class Trainer:
             if self.checkpoint_manager is not None:
                 self.checkpoint_manager.save ("last.pth", self.model, self.optimizer, self.scheduler, epoch, self.best_val_acc)
                 if self.val_acc > self.best_val_acc:
-                    self.best_val_acc = val_acc
+                    self.best_val_acc = self.val_acc
                     self.checkpoint_manager.save ("best.pth", self.model, self.optimizer, self.scheduler, epoch, self.best_val_acc)
 
             if self.scheduler is not None:
