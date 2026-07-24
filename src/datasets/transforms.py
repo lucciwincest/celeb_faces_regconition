@@ -8,8 +8,8 @@ def get_transforms (image_size):
         transforms.RandomRotation (10),
         transforms.ToTensor (),
         transforms.Normalize (
-            mean = ResNet50_Weights.IMAGENET1K_V2.transforms ().mean,
-            std = ResNet50_Weights.IMAGENET1K_V2.transforms ().std
+            mean = ResNet50_Weights.IMAGENET1K_V2.mean,
+            std = ResNet50_Weights.IMAGENET1K_V2.std
         )
     ])
 
@@ -17,8 +17,8 @@ def get_transforms (image_size):
         transforms.Resize (image_size),
         transforms.ToTensor (),
         transforms.Normalize (
-            mean = ResNet50_Weights.IMAGENET1K_V2.transforms ().mean,
-            std = ResNet50_Weights.IMAGENET1K_V2.transforms ().std
+            mean = ResNet50_Weights.IMAGENET1K_V2.mean,
+            std = ResNet50_Weights.IMAGENET1K_V2.std
         )
     ])   
 
